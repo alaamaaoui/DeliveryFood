@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react'
-import { useDispatch } from 'react-redux'
-import { addItems } from '../../action'
+import { useDispatch, useSelector } from 'react-redux'
+import { swicthTab } from '../../action'
+import { StateProps } from '../../reducer'
 
 interface NavTabItemProps {
     href: string,
@@ -9,21 +10,13 @@ interface NavTabItemProps {
     children?: ReactNode
 }
 
-const NavTabItem = ({ href, name, isActive, children }: NavTabItemProps) => {
+const NavTabItem = ({ href, name, children }: NavTabItemProps) => {
 
     const dispatch = useDispatch()
+    const active_tab = useSelector<StateProps, StateProps["active_tab"]>( (state) => state.active_tab)
     
-    const onAddItems = () => {
-        switch (name) {
-            case "sandwiches":
-                dispatch(addItems('sandwiches'))
-                break
-            case "cakes":
-                dispatch(addItems('cakes'))
-                break
-            default:
-                dispatch(addItems('dishes'))
-        }
+    const onSwicthTab = () => {
+        dispatch(swicthTab(name))
     }
 
 
@@ -32,8 +25,8 @@ const NavTabItem = ({ href, name, isActive, children }: NavTabItemProps) => {
         <li>
             <a
                 href={href}
-                className={`block text-lg px-4 py-2 rounded-md ${isActive ? 'font-medium bg-amber-100 text-amber-700' : ''}`}
-                onClick={onAddItems}
+                className={`block text-lg px-4 py-2 rounded-md ${active_tab === name ? 'font-medium bg-amber-100 text-amber-700' : ''}`}
+                onClick={onSwicthTab}
             >
                 {children}
             </a>

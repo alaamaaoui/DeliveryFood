@@ -1,15 +1,3 @@
-export type AddItemsAction = {
-    type: "ADD_ITEMS",
-    payload: any
-}
-
-export const addItems = (items: any) => {
-    return {
-        type: "ADD_ITEMS",
-        payload: items
-    }
-}
-
 export type CreateOrderAction = {
     type: "CREATE_ORDER",
     payload: any
@@ -79,5 +67,29 @@ export const incrementOrder = (menu: any) => {
     return {
         type: "INCREMENT_ORDER",
         payload: menu
+    }
+}
+
+export type SwicthMenuAction = {
+    type: "SWITCH_MENU",
+    payload: any
+}
+
+export const swicthMenu = (items: any) => {
+    return {
+        type: "SWITCH_MENU",
+        payload: items
+    }
+}
+
+export type SwicthTabAction = {
+    type: "SWITCH_TAB",
+    payload: any
+}
+
+export const swicthTab = (items: any) => {
+    return {
+        type: "SWITCH_TAB",
+        payload: items
     }
 }

@@ -28,13 +28,13 @@ const ModalOrder = ({ quantity, description, children, title, selectedMenu, show
     const onAddOrder = (selectedMenu: any) => {
         if(!(orders.filter((order) => order.status === 'in_progress')).length){
             var order = {
-                date: '23/09/2022',
+                date: '',
                 id: ((orders.filter((order) => order.status === 'valid'))[orders.length-1] && (orders.filter((order) => order.status === 'valid'))[orders.length-1].id+1) || 1,
                 name: '',
                 adress: '',
                 phone: '',
                 email: '',
-                price: 10,
+                price: 0,
                 status: 'in_progress',
                 menus: []
             }

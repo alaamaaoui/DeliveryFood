@@ -20,6 +20,8 @@ const Card = ( {order}: CardProps) => {
 
     const personalInfo = [name, adress, phone, email]
 
+    console.log(order)
+
     const onRemoveOrder = (menu: any) => {
         dispatch(removeOrder(menu))
     }

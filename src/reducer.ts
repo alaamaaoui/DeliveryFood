@@ -3,7 +3,9 @@ export interface StateProps {
     sandwiches: any[],
     cakes: any[],
     orders: any[],
-    items: string
+    items: string,
+    active_url: string,
+    active_tab: string,
 }
 
 const initialState = {
@@ -83,7 +85,9 @@ const initialState = {
             description: 'This is a description of Hank’s Juiciest Beef Burger',
         }],
     }],
-    items: 'dishes'
+    items: 'dishes',
+    active_url: window.location.pathname,
+    active_tab: 'dishes'
 }
 
 export const reducer = (state: StateProps = initialState, action: any) => {
@@ -92,10 +96,12 @@ export const reducer = (state: StateProps = initialState, action: any) => {
         case "CREATE_ORDER":
             return { ...state, orders: [...state.orders, action.payload]}
         case "UPDATE_ORDER":
+            console.log(state.orders.filter((order) => order.status === 'in_progress')[0].date)
             state.orders.filter((order) => order.status === 'in_progress')[0].name = action.payload[0].current.value
             state.orders.filter((order) => order.status === 'in_progress')[0].adress = action.payload[1].current.value
             state.orders.filter((order) => order.status === 'in_progress')[0].phone = action.payload[2].current.value
             state.orders.filter((order) => order.status === 'in_progress')[0].email = action.payload[3].current.value
+            state.orders.filter((order) => order.status === 'in_progress')[0].date = new Date().toLocaleString()
             state.orders.filter((order) => order.status === 'in_progress')[0].status = 'valid'
             return { ...state, orders: [...state.orders]}
         case "ADD_ORDER":
@@ -119,8 +125,10 @@ export const reducer = (state: StateProps = initialState, action: any) => {
             price = 0
             state.orders.filter((order) => order.status === 'in_progress')[0].price = computePrice(state, price)
             return { ...state, orders: [...state.orders]}
-        case "ADD_ITEMS":
-            return { ...state, items: action.payload}
+        case "SWITCH_MENU":
+            return { ...state, active_url: action.payload}
+        case "SWITCH_TAB":
+            return { ...state, items: action.payload, active_tab: action.payload}
         default:
             return state
     }
