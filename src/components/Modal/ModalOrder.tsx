@@ -29,7 +29,7 @@ const ModalOrder = ({ quantity, description, children, title, selectedMenu, show
         if(!(orders.filter((order) => order.status === 'in_progress')).length){
             var order = {
                 date: '',
-                id: ((orders.filter((order) => order.status === 'valid'))[orders.length-1] && (orders.filter((order) => order.status === 'valid'))[orders.length-1].id+1) || 1,
+                id: ((orders.filter((order) => order.status === 'done'))[orders.length-1] && (orders.filter((order) => order.status === 'done'))[orders.length-1].id+1) || 1,
                 name: '',
                 adress: '',
                 phone: '',

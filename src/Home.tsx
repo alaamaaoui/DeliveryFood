@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { swicthMenu } from './action';
-import foodImage from './assets/img/food.png'
+const Banner = React.lazy(() => import('./shared/LazyComponent/Banner'));
 
 const Home = () => {
         
@@ -27,7 +27,9 @@ const Home = () => {
                 </Link>
             </div>
             <div className='sm:w-full lg:w-1/2 xl:w-1/2 p-8 text-center self-center'>
-                <img src={foodImage} alt='Home' width='100%' height='100%' className='max-h-[calc(100vh-80px)]'/>
+                <Suspense fallback={<div>Loading ...</div>}>
+                    <Banner />
+                </Suspense>
             </div>
         </section>
     )

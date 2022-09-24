@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import order_icon from '../../assets/icons/order.svg'
 import { StateProps } from '../../reducer'
 import { ModalOrder } from '../Modal'
 
+const Menu = React.lazy(() => import('../../shared/LazyComponent/Menu'));
 interface NavItemProps {
     id: string,
     image: string,
@@ -35,7 +36,9 @@ const ListItem = (props : any) => {
             {items.map((item: NavItemProps) => (
                 <li key={item.name}>
                     <article className='relative p-4 flex space-x-4'>
-                        <img src={item.image} alt={item.name} className="flex-none w-[150px] h-[150px] rounded-lg object-cover bg-gray-100"/>
+                    <Suspense fallback={<div>Loading ...</div>}>
+                        <Menu name={item.name} path={item.image}/>
+                    </Suspense>
                         <div className="min-w-0 flex-auto sm:pr-20 lg:pr-0 xl:pr-20">
                             <h2 className='text-lg text-black font-semibold mb-1'>
                                 {item.name}
